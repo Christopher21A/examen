@@ -21,13 +21,13 @@ import ec.edu.insteclrg.dto.CategoriaDTO;
 import ec.edu.insteclrg.service.crud.CategoryService;
 
 @RestController
-@RequestMapping("/api/v1.0/categoria/")
+@RequestMapping("/api/v1.0/categoria/")//url del controlador de categoria
 public class CategoryController {
 
 	@Autowired
 	CategoryService service;
 
-	@PostMapping
+	@PostMapping(path = "guardar")
 	public ResponseEntity<Object> guardar(@RequestBody CategoriaDTO dto) {
 		service.save(dto);
 		return new ResponseEntity<>(new ApiResponseDTO<>(true, null), HttpStatus.CREATED);
@@ -50,8 +50,9 @@ public class CategoryController {
 			return new ResponseEntity<>(new ApiResponseDTO<>(false, null), HttpStatus.NOT_FOUND);
 		}
 	}
-
-	@GetMapping(path = "id/buscar")
+	
+	//se coloca las {} en el path xq vamos a recibir un dato y "id sera donde se colocara"
+	@GetMapping(path = "{id}/buscar")
 	public ResponseEntity<Object> buscar(@PathVariable Long id) {
 		CategoriaDTO dto = new CategoriaDTO();
 		dto.setId(id);
@@ -64,7 +65,8 @@ public class CategoryController {
 		}
 	}
 	
-	@DeleteMapping(path = "/id/eliminar")
+	//se coloca las {} en el path xq vamos a recibir un dato y "id sera donde se colocara"
+	@DeleteMapping(path = "{id}/eliminar")
 	public ResponseEntity<Object> eliminar(@PathVariable Long id) {
 		CategoriaDTO dto = new CategoriaDTO();
 		dto.setId(id);
@@ -79,3 +81,4 @@ public class CategoryController {
 
 
 }
+
