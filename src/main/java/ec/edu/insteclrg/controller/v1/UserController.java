@@ -82,5 +82,4 @@ public class UserController {
 		this.service.delete(dto);
 		return new ResponseEntity<>(new ApiResponseDTO<>(true, null), HttpStatus.OK);
 	}
-
 }
