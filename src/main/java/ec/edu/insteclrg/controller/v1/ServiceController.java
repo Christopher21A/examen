@@ -21,25 +21,27 @@ import ec.edu.insteclrg.dto.ServicioDTO;
 import ec.edu.insteclrg.service.crud.ServiceService;
 
 @RestController
-@RequestMapping("/api/v1.0/servicio/")
+@RequestMapping("/api/v1.0/servicio/")//url del controlador de servicio
 public class ServiceController {
 	@Autowired
 	ServiceService service;
 
-	@PostMapping
+	//Guardamos datos en la clase servicio
+	@PostMapping (path = "guardar")
 	public ResponseEntity<Object> guardar(@RequestBody ServicioDTO dto) {
 		service.save(dto);
 		return new ResponseEntity<>(new ApiResponseDTO<>(true, null), HttpStatus.CREATED);
 	}
 
-	@PutMapping(value= "Service")
+	//Actualizar datos en servicio
+	@PutMapping(path= "actualizar")
 	public ResponseEntity<Object> actualizar(@RequestBody ServicioDTO dto) {
 		service.update(dto);
 		return new ResponseEntity<>(new ApiResponseDTO<>(true, null),HttpStatus.CREATED);
 		
 	}
 
-	@GetMapping
+	@GetMapping(path = "listar")
 	public ResponseEntity<Object> listar() {
 		List<ServicioDTO> list = service.findAll(new ServicioDTO());
 		if (!list.isEmpty()) {
@@ -50,7 +52,7 @@ public class ServiceController {
 		}
 	}
 
-	@GetMapping(path = "id/buscar")
+	@GetMapping(path = "{id}/buscar")
 	public ResponseEntity<Object> buscar(@PathVariable Long id) {
 		ServicioDTO dto = new ServicioDTO();
 		dto.setId(id);
@@ -63,7 +65,7 @@ public class ServiceController {
 		}
 	}
 	
-	@DeleteMapping(path = "id/eliminar")
+	@DeleteMapping(path = "{id}/eliminar")
 	public ResponseEntity<Object> eliminar(@PathVariable Long id) {
 		ServicioDTO dto = new ServicioDTO();
 		dto.setId(id);
@@ -76,3 +78,4 @@ public class ServiceController {
 		}
 	}
 }
+
