@@ -61,5 +61,4 @@ public abstract class GenericCrudServiceImpl<DOMAIN, DTO> implements GenericCrud
 
 	@Override
 	public abstract DOMAIN mapToDomain(DTO dto);
-
 }
