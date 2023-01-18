@@ -34,10 +34,12 @@ public class UserController {
 		return new ResponseEntity<>(new ApiResponseDTO<>(true, null), HttpStatus.CREATED);
 	}
 
+	//Metodo para logear
 	@PostMapping("/login")
 	public ResponseEntity<Object> login(@RequestBody UserDTO dto) {
+		//Recibimos datos y guradamos en la clase User
 		Optional<User> domain = service.login(dto);
-		domain.get().setPassword("");
+		domain.get().setPassword("");//no se presenta la contraseña
 		dto = service.mapToDto(domain.get());
 		return new ResponseEntity<>(new ApiResponseDTO<>(true, dto), HttpStatus.OK);
 	}
@@ -49,7 +51,7 @@ public class UserController {
 
 	}
 
-	@GetMapping
+	@GetMapping(path = "/Listar")
 	public ResponseEntity<Object> listar() {
 		List<UserDTO> list = service.findAll(new UserDTO());
 		if (!list.isEmpty()) {
@@ -60,7 +62,7 @@ public class UserController {
 		}
 	}
 
-	@GetMapping(path = "/id")
+	@GetMapping(path = "/{id}")
 	public ResponseEntity<Object> buscar(@PathVariable Long id) {
 		UserDTO dto = new UserDTO();
 		dto.setId(id);
