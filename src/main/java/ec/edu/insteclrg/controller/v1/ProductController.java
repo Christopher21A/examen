@@ -50,7 +50,8 @@ public class ProductController {
 		}
 	}
 
-	@GetMapping(path = "id/buscar")
+	//se coloca las {} en el path xq vamos a recibir un dato y "id sera donde se colocara"
+	@GetMapping(path = "{id}/buscar")
 	public ResponseEntity<Object> buscar(@PathVariable Long id) {
 		ProductoDTO dto = new ProductoDTO();
 		dto.setId(id);
@@ -63,7 +64,8 @@ public class ProductController {
 		}
 	}
 	
-	@DeleteMapping(path = "/id/eliminar")
+	//se coloca las {} en el path xq vamos a recibir un dato y "id sera donde se colocara"
+	@DeleteMapping(path = "{id}/eliminar")
 	public ResponseEntity<Object> eliminar(@PathVariable Long id) {
 		ProductoDTO dto = new ProductoDTO();
 		dto.setId(id);
@@ -75,6 +77,4 @@ public class ProductController {
 			return new ResponseEntity<>(new ApiResponseDTO<>(false, null), HttpStatus.NOT_FOUND);
 		}
 	}
-
-
 }
