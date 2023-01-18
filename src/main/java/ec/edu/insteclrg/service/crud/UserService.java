@@ -61,7 +61,7 @@ public class UserService extends GenericCrudServiceImpl<User, UserDTO> {
 		Optional<User> optional = find(dto);
 		if (!optional.isPresent()) {
 			User domainObject = mapToDomain(dto);
-			domainObject.setPassword(passwordEncoder.encode(domainObject.getPassword()));
+			domainObject.setPassword(passwordEncoder.encode(domainObject.getPassword()));//se registra y encripta la contraseña
 			repository.save(domainObject);
 		} else {
 			throw new ApiException(String.format("Registro %s ya existe en el sistema", dto));
